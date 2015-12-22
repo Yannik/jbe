@@ -103,8 +103,8 @@ public abstract class AbstractAttributeListDetailPane extends ListDetailPane {
         } else {
             table.setColumnModel(tableColumnModel);
         }
-        adjustColumns(table, tableColumnModel);
         adjustRowHeight(table);
+        table.setAutoResizeMode(JTable.AUTO_RESIZE_ALL_COLUMNS);
 
     }
 
@@ -124,19 +124,6 @@ public abstract class AbstractAttributeListDetailPane extends ListDetailPane {
             table.setRowHeight(row, rowHeight);
         }
 
-    }
-
-    private void adjustColumns(JTable table, TableColumnModel tableColumnModel) {
-        final TableColumnModel columnModel = table.getColumnModel();
-        for (int column = 0; column < table.getColumnCount(); column++) {
-            int width = 50; // Min width
-            for (int row = 0; row < table.getRowCount(); row++) {
-                TableCellRenderer renderer = table.getCellRenderer(row, column);
-                Component comp = table.prepareRenderer(renderer, row, column);
-                width = Math.max(comp.getPreferredSize().width +1 , width);
-            }
-            columnModel.getColumn(column).setPreferredWidth(width);
-        }
     }
 
     private AbstractAttributeTableModel getCachedTableModel(

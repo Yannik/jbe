@@ -17,6 +17,7 @@ import javax.swing.*;
 import javax.swing.table.*;
 import javax.swing.tree.TreePath;
 
+import java.awt.*;
 import java.util.WeakHashMap;
 
 /**
@@ -103,6 +104,27 @@ public abstract class AbstractAttributeListDetailPane extends ListDetailPane {
             table.setColumnModel(tableColumnModel);
         }
         adjustColumns(table, tableColumnModel);
+        adjustRowHeight(table);
+
+    }
+
+    private void adjustRowHeight(JTable table) {
+        System.out.println("adjustRowHeight, row count: " + table.getRowCount());
+
+        for (int row = 0; row < table.getRowCount(); row++)
+        {
+
+            int rowHeight = table.getRowHeight();
+
+            for (int column = 0; column < table.getColumnCount(); column++)
+            {
+                Component comp = table.prepareRenderer(table.getCellRenderer(row, column), row, column);
+                rowHeight = Math.max(rowHeight, comp.getPreferredSize().height);
+            }
+
+            table.setRowHeight(row, rowHeight);
+        }
+
     }
 
     private void adjustColumns(JTable table, TableColumnModel tableColumnModel) {

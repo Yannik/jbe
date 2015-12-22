@@ -109,7 +109,6 @@ public abstract class AbstractAttributeListDetailPane extends ListDetailPane {
     }
 
     private void adjustRowHeight(JTable table) {
-        System.out.println("adjustRowHeight, row count: " + table.getRowCount());
 
         for (int row = 0; row < table.getRowCount(); row++)
         {
